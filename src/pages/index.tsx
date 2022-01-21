@@ -1,61 +1,25 @@
 import type { NextPage } from 'next'
-import Head from 'next/head'
+import Calculator from '../features/calculator'
+import CalcLogo from '../assets/calculator'
+import { useState } from 'react'
 
-import Counter from '../features/counter/Counter'
-import styles from '../styles/Home.module.css'
 
 const IndexPage: NextPage = () => {
+  const [hidden, setHidden] = useState(true)
+  const handleClick = ()=>{
+    setHidden(!hidden)
+  }
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Redux Toolkit</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <header className={styles.header}>
-        <img src="/logo.svg" className={styles.logo} alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className={styles.link}
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className={styles.link}
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className={styles.link}
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className={styles.link}
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
+    <div className= 'w-screen h-screen flex items-center justify-center wallpaper bg-cover'>
+      <Calculator hidden = {hidden}/>
+      <div className='absolute left-10 top-32 font-semibold text-xl flex items-center flex-col justify-around'
+        onClick={handleClick}  
+      >
+        <CalcLogo />
+        <span className='bg-teal-700 px-1'>
+          Calculator
         </span>
-      </header>
+      </div>
     </div>
   )
 }
