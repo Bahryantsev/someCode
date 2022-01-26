@@ -30,12 +30,11 @@ const toolkit = createSlice({
                 )
                 :
                 (state.count.toString().length < 10 ?
-                    (+state.count === 0 ? state.count = +action.payload : state.count = state.count + action.payload.toString(),
+                    (state.count === '0' ? state.count = +action.payload : state.count = state.count + action.payload.toString(),
                         state.count = +state.count
                     )
                     :
                     (state.count = 'ERROR'))
-
         },
         clear(state) {
             state.prev = NaN
