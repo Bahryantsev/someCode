@@ -30,7 +30,7 @@ const toolkit = createSlice({
                 )
                 :
                 (state.count.toString().length < 10 ?
-                    (state.count === '0' ? state.count = +action.payload : state.count = state.count + action.payload.toString(),
+                    (state.count === 0 ? state.count = +action.payload : state.count = state.count + action.payload.toString(),
                         state.count = +state.count
                     )
                     :
@@ -54,12 +54,27 @@ const toolkit = createSlice({
                 )
         },
         equal(state) {
+            let result  = 0
+            let resultArr = []
             isNaN(state.prev) ? 
             state.count = state.count
             :
-            state.count = eval(state.prev.toString() + state.operator + state.count)
+            result = eval(state.prev.toString() + state.operator + state.count)
+            let length = result.toString().length
+            result.toString().includes('.') ? result = +result.toFixed(length-2 < 10 ? length-2 : 10): state.count = result
+            resultArr = result.toString().split('')
+            for (let i = resultArr.length ; i > 0  ; i - 1) {
+                resultArr[i] == 0 && resultArr.pop()
+                console.log('work')
+                if(resultArr[i] == '.'){
+                    resultArr.pop()
+                    break
+                } else if(resultArr[i] != 0){
+                    break
+                }
+            }
+            state.count = +resultArr.join('')
             state.operator = null
-            state.count = +state.count
             state.prev = NaN
         },
         memorize(state) {
